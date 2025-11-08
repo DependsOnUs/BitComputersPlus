@@ -31,7 +31,7 @@ import net.berrycompany.bitcomputers.BitComputers;
 import net.berrycompany.bitcomputers.BitComputersConfig;
 import net.berrycompany.bitcomputers.BitComputersMachine;
 import net.berrycompany.bitcomputers.api.IBitComputersDevice;
-import net.berrycompany.bitcomputers.devices.BankSelector;
+import net.berrycompany.bitcomputers.devices.opencomputers.BankSelector;
 import li.cil.oc.api.machine.Signal;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -117,7 +117,7 @@ public class Bus {
 		}
 		if (BitComputersConfig.debugDeviceWrites)
 			BitComputers.log.info(String.format("[Bus] Device Write $%04X = 0x%02X", address, data));
-		for (Device device : deviceList) {
+		for (Device device : this.deviceList) {
 			MemoryRange memoryRange = device.getMemoryRange();
 			if (address >= memoryRange.startAddress && address <= memoryRange.endAddress) {
 				device.write(address - memoryRange.startAddress, data);
@@ -125,6 +125,12 @@ public class Bus {
 			}
 		}
 	}
+
+    public void step() {
+        for (Device device : this.deviceList) {
+            device.step();
+        }
+    }
 
 	public void onSignal(Signal signal) {
 		for (Device device : deviceList)

@@ -24,6 +24,7 @@
 package com.loomcom.symon;
 
 public abstract class CPUState {
+
     /**
      * Returns a string formatted for the trace log.
      *
@@ -35,4 +36,8 @@ public abstract class CPUState {
      * @return The value of the Process Status Register, as a byte.
      */
     public abstract int getStatusFlag();
+
+    public abstract String getInstructionByteStatus();
+
+    public abstract String getProcessorStatusString();
 }

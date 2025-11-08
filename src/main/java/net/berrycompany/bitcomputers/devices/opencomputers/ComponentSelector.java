@@ -1,4 +1,4 @@
-package net.berrycompany.bitcomputers.devices;
+package net.berrycompany.bitcomputers.devices.opencomputers;
 
 import java.util.Arrays;
 import java.util.LinkedList;

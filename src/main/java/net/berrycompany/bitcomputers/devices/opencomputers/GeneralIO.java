@@ -1,4 +1,4 @@
-package net.berrycompany.bitcomputers.devices;
+package net.berrycompany.bitcomputers.devices.opencomputers;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.EvictingQueue;

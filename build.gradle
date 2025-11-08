@@ -1,38 +1,44 @@
-//file:noinspection VulnerableLibrariesLocal
 buildscript {
     repositories {
-        maven {url = "https://maven.minecraftforge.net"}
+        maven { url = 'https://maven.minecraftforge.net/' }
         mavenCentral()
         mavenLocal()
     }
     dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:4.1.14"
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
     }
 }
 
-apply plugin: 'scala'
+file "gradle.properties" withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "1.12.2-1.2.0"
+version = "${config.minecraft_version}-${config.mod_version}"
 group = "net.berrycompany.bitcomputers"
 archivesBaseName = "BitComputers"
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = "1.8"
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 repositories {
     mavenCentral()
     mavenLocal()
     maven {
-        name = "OC repo"
         url = "https://maven.cil.li/"
     }
 }
 
 minecraft {
-    mappings channel: 'snapshot', version: '20180814-1.12'
-
+    mappings channel: "${config.minecraft_mappings_channel}", version: "${config.minecraft_mappings_version}"
     runs {
         client {
             workingDirectory project.file('run')
@@ -48,35 +54,22 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2859'
-
-    implementation fg.deobf("li.cil.oc:OpenComputers:MC1.12.2-1.7.5.221")
+    minecraft "net.minecraftforge:forge:${config.minecraft_version}-${config.forge_version}"
+    implementation "li.cil.oc:OpenComputers:MC${config.minecraft_version}-${config.oc_version}"
 }
 
 jar {
     manifest {
         attributes([
-                "Specification-Title": "BitComputers",
-                "Specification-Vendor": "gamax92",
-                "Specification-Version": project.version,
+                "Specification-Title": "${archivesBaseName}",
+                "Specification-Vendor": "examplemodsareus",
+                "Specification-Version": "${project.version}", // We are version 1 of ourselves
                 "Implementation-Title": project.name,
-                "Implementation-Version": "${archiveVersion}",
-                "Implementation-Vendor" :"James Coonradt",
+                "Implementation-Version": "${project.version}",
+                "Implementation-Vendor" :"examplemodsareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
 
 jar.finalizedBy('reobfJar')
-publish.dependsOn('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
-}

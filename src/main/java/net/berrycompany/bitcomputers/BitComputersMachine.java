@@ -3,8 +3,7 @@ package net.berrycompany.bitcomputers;
 import com.loomcom.symon.Bus;
 import com.loomcom.symon.CPU;
 import li.cil.oc.api.machine.Context;
-import net.berrycompany.bitcomputers.devices.*;
-import net.berrycompany.bitcomputers.devices.GeneralIO;
+import net.berrycompany.bitcomputers.devices.opencomputers.*;
 
 import java.util.ArrayList;
 

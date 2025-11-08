@@ -15,27 +15,25 @@ public class BitComputersVM65CE02 {
 	public int cyclesPerTick;
 
 	public BitComputersVM65CE02(Context context) {
-		super();
 		MinecraftForge.EVENT_BUS.register(this);
 		try {
-			machine = new BitComputersMachine65CE02(context);
-			if (context.node().network() == null) {
-				// Loading from NBT
-				return;
+            this.machine = new BitComputersMachine65CE02(context);
+			if (context.node().network() != null) {
+                this.machine.getCpu().reset();
 			}
-			machine.getCpu().reset();
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to setup BitComputers", e);
 		}
 	}
 
 	void run() throws Exception {
-		machine.getComponentSelector().checkDelay();
-		CPU65CE02 mCPU = machine.getCpu();
+        CPU65CE02 mCPU = this.machine.getCpu();
+        this.machine.getComponentSelector().checkDelay();
 		while (mCPU.getCycles() > 0) {
 			mCPU.step();
 		}
-		machine.getGioDev().flush();
+
+        this.machine.getGioDev().flush();
 	}
 
 	@SubscribeEvent
@@ -45,13 +43,14 @@ public class BitComputersVM65CE02 {
 			MinecraftForge.EVENT_BUS.unregister(this);
 			return;
 		}
-		if (event.phase != TickEvent.Phase.START) {
-			return;
-		}
-		CPU65CE02 mCPU = machine.getCpu();
-		if (mCPU.getCycles() < cyclesPerTick) {
-			mCPU.addCycles(cyclesPerTick);
-		}
-		machine.getRTC().onServerTick();
+
+		if (event.phase == TickEvent.Phase.START) {
+            CPU65CE02 mCPU = this.machine.getCpu();
+            if (mCPU.getCycles() < this.cyclesPerTick) {
+                mCPU.addCycles(this.cyclesPerTick);
+            }
+
+            this.machine.getRTC().onServerTick();
+        }
 	}
 }

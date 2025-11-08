@@ -178,6 +178,8 @@ public class CPU65C02S extends CPU implements InstructionTable65C02S {
             incrementPC();
         }
 
+        this.bus.step();
+
         // Get the data from the effective address (if any)
         int effectiveAddress = 0;
         int tmp; // Temporary storage
@@ -786,7 +788,7 @@ public class CPU65C02S extends CPU implements InstructionTable65C02S {
         }
 
         if (BitComputersConfig.debugCpuTraceLog)
-            BitComputers.log.info("[Cpu] " + this.state.toTraceEvent());
+            BitComputers.log.info("[CPU 65C02] " + this.state.toTraceEvent());
     }
 
     private void handleBrk(int returnPc) {

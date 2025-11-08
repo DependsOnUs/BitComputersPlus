@@ -9,7 +9,7 @@ import java.util.zip.GZIPOutputStream;
 import net.berrycompany.bitcomputers.BitComputers;
 import net.berrycompany.bitcomputers.BitComputersArchitecture;
 import net.berrycompany.bitcomputers.BitComputersConfig;
-import net.berrycompany.bitcomputers.devices.BankSelector;
+import net.berrycompany.bitcomputers.devices.opencomputers.BankSelector;
 import net.berrycompany.bitcomputers.exceptions.CallSynchronizedException;
 import net.berrycompany.bitcomputers.util.ValueManager;
 import net.minecraftforge.common.MinecraftForge;

@@ -1,4 +1,4 @@
-package net.berrycompany.bitcomputers.devices;
+package net.berrycompany.bitcomputers.devices.opencomputers;
 
 import com.loomcom.symon.Bus;
 import com.loomcom.symon.CPU;

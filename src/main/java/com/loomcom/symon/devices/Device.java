@@ -72,6 +72,8 @@ public abstract class Device implements Comparable<Device> {
 
 	public abstract void write(int address, int data);
 
+    public void step() {}
+
 	@Override
 	public String toString() {
 		return String.format("%s@$%04X", shortname, memoryRange.startAddress());

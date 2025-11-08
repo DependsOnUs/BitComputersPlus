@@ -32,13 +32,13 @@ import com.loomcom.symon.Bus;
 import com.loomcom.symon.cpus.csg.CPU65CE02;
 
 import net.berrycompany.bitcomputers.BitComputersMachine;
-import net.berrycompany.bitcomputers.devices.BootROM;
-import net.berrycompany.bitcomputers.devices.ComponentSelector;
-import net.berrycompany.bitcomputers.devices.ComputerInfo;
-import net.berrycompany.bitcomputers.devices.CopyEngine;
-import net.berrycompany.bitcomputers.devices.RTC;
-import net.berrycompany.bitcomputers.devices.BankSelector;
-import net.berrycompany.bitcomputers.devices.GeneralIO;
+import net.berrycompany.bitcomputers.devices.opencomputers.BootROM;
+import net.berrycompany.bitcomputers.devices.opencomputers.ComponentSelector;
+import net.berrycompany.bitcomputers.devices.opencomputers.ComputerInfo;
+import net.berrycompany.bitcomputers.devices.opencomputers.CopyEngine;
+import net.berrycompany.bitcomputers.devices.opencomputers.RTC;
+import net.berrycompany.bitcomputers.devices.opencomputers.BankSelector;
+import net.berrycompany.bitcomputers.devices.opencomputers.GeneralIO;
 
 @SuppressWarnings("unused")
 public class BitComputersMachine65CE02 extends BitComputersMachine {
